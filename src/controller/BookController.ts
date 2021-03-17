@@ -1,3 +1,4 @@
+import {BooksService} from "../service/BookService";
 export class BooksController  {
     async create (event: any, context: any) {
         const timestamp = new Date().getTime();
@@ -8,13 +9,12 @@ export class BooksController  {
                 checked: false,
                 createdAt: timestamp,
                 updatedAt: timestamp,
-            
         };
         try {
-            const result = await this.createBook({
-                name: params.name,
-                id: params.id,
-            });
+            const result = await BooksService.createBook(
+                params.name,
+                 params.id.toString()
+            );
 
             return "success to add a book";
         } catch (err) {
@@ -24,7 +24,4 @@ export class BooksController  {
         }
     }
 
-    private async createBook(param: {name: any; id: any}) {
-        
-    }
 }

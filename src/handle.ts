@@ -1,6 +1,6 @@
 import * as AWS from 'aws-sdk';
 
-import { BooksController } from './controller/books';
+import { BooksController } from './controller/BookController';
 import {Handler} from "express";
 const booksController = new BooksController();
 
