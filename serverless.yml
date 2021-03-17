@@ -4,6 +4,7 @@ frameworkVersion: ">=1.1.0 <=2.4.0"
 
 plugins:
   - serverless-dynamodb-local
+  - serverless-plugin-typescript
   - serverless-offline
 
 custom:
@@ -34,7 +35,13 @@ provider:
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
       Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
-
+functions:
+  create:
+    handler: app/handler.create
+    events:
+      - http:
+          path: newbooks
+          method: post
 
 resources:
   Resources:
