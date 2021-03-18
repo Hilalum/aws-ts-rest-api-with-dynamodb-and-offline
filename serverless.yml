@@ -40,8 +40,9 @@ functions:
     handler: app/handler.create
     events:
       - http:
-          path: newbooks
+          path: src
           method: post
+          cors: true
 
 resources:
   Resources:
