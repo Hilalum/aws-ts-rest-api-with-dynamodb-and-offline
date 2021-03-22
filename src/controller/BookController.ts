@@ -23,5 +23,15 @@ export class BooksController  {
             return "error!";
         }
     }
+    async queryAll () {
+        try {
+            const result = await BooksService.queryAllBook();
 
+            return result;
+        } catch (err) {
+            console.error(err);
+
+            return "error!";
+        }
+    }
 }

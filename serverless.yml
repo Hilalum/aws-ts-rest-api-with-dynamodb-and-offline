@@ -24,7 +24,7 @@ provider:
   name: aws
   runtime: nodejs12.x
   environment:
-    DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
+    NODE_ENV: ${env:NODE_ENV}
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -34,14 +34,20 @@ provider:
         - dynamodb:PutItem
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
-      Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
 functions:
   create:
     handler: src/Handler.create
     events:
       - http:
-          path: src
+          path: create
           method: post
+          cors: true
+  queryAll:
+    handler: src/Handler.queryAll
+    events:
+      - http:
+          path: queryAll
+          method: get
           cors: true
 
 resources:
@@ -59,4 +65,4 @@ resources:
             AttributeName: id
             KeyType: HASH
         BillingMode: PAY_PER_REQUEST
-        TableName: ${self:provider.environment.DYNAMODB_TABLE}
+        TableName: "books"

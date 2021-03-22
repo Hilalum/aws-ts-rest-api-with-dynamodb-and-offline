@@ -1,6 +1,14 @@
-import { DynamoDB } from 'aws-sdk'
+const AWS = require('aws-sdk');
+let options = {
+    region: 'localhost',
+    endpoint: 'http://localhost:8000',
+    accessKeyId: 123,
+    accessSecretKey: 123,
+};
 
-const dynamoDb = new DynamoDB.DocumentClient()
+
+const dynamoDb = new AWS.DynamoDB.DocumentClient(options);
+
 export class BooksService {
 
     static async createBook(name: string, id: string) {
@@ -28,5 +36,18 @@ export class BooksService {
             console.error(err);
             return false;
         }
+    }
+
+    static async queryAllBook() {
+        const params = {
+            TableName: "books",
+        }
+        return dynamoDb.get(params, (error, result) => {
+            // handle potential errors
+            if (error) {
+                console.error(error);
+                return false;
+            }
+        });
     }
 }

@@ -1,6 +1,6 @@
 {
     "Table": {
-        "TableName": "serverless-rest-api-with-dynamodb-dev",
+        "TableName": "books",
         "KeySchema": [
             {
                 "AttributeName": "id",

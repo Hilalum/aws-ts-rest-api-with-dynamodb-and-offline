@@ -6,8 +6,13 @@
   "author": "Christoph Gysin <christoph.gysin@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "aws": "^0.0.3-2",
+    "aws-cli": "^0.0.2",
     "serverless": "^2.4.0",
     "uuid": "^2.0.3"
+  },
+  "scripts":{
+    "build": "rm -rf dist && tsc"
   },
   "devDependencies": {
     "@types/cors": "^2.8.10",
